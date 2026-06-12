@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PayrollPro | Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="container">
+
+    <!-- HEADER -->
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="logo">
+          <div class="logo-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 7h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zM10 4h4v3h-4V4z"/>
+            </svg>
+          </div>
+          <div class="logo-text">
+            <h1>Payroll<span class="highlight">Pro</span></h1>
+            <p>Enterprise Management System</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- FLASH MESSAGES -->
+    <% if (locals.success) { %>
+      <div class="flash flash-success">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        <%= success %>
+      </div>
+    <% } %>
+    <% if (locals.error) { %>
+      <div class="flash flash-error">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <%= error %>
+      </div>
+    <% } %>
+
+    <!-- STATS -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <p class="stat-label">Total Employees</p>
+        <h2 class="stat-value"><%= stats.totalEmployees %></h2>
+        <div class="stat-sub positive">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          Active workforce
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="1" x2="12" y2="23"/>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+        <p class="stat-label">Total Payroll</p>
+        <h2 class="stat-value"><%= stats.totalPayroll %></h2>
+        <div class="stat-sub neutral">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          Monthly distribution
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+        </div>
+        <p class="stat-label">Highest Salary</p>
+        <h2 class="stat-value"><%= stats.highestSalary %></h2>
+        <div class="stat-sub positive">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          Top performer
+        </div>
+      </div>
+    </div>
+
+    <!-- EMPLOYEE DIRECTORY -->
+    <div class="section-card">
+      <div class="toolbar">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          Employee Directory
+        </h2>
+        <div class="toolbar-right">
+          <form action="/search" method="GET">
+            <div class="search-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
+              </svg>
+              <input type="text" name="q"
+                placeholder="Search ID, Name, Department..."
+                value="<%= locals.searchQuery || '' %>">
+            </div>
+          </form>
+          <a href="/add" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19"/>
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            Add Employee
+          </a>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Department</th>
+              <th>Basic Salary</th>
+              <th>HRA (40%)</th>
+              <th>DA (10%)</th>
+              <th>PF (12%)</th>
+              <th>Net Salary</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (employees.length === 0) { %>
+              <tr>
+                <td colspan="9">
+                  <div class="empty-state">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                      <circle cx="9" cy="7" r="4"/>
+                    </svg>
+                    <p>No employees found. <a href="/add">Add the first one →</a></p>
+                  </div>
+                </td>
+              </tr>
+            <% } else { %>
+              <% employees.forEach(function(emp) { %>
+                <tr>
+                  <td class="td-id"><%= emp.id %></td>
+                  <td><%= emp.name %></td>
+                  <td><%= emp.department %></td>
+                  <td class="td-mono"><%= emp.basicFmt %></td>
+                  <td class="td-mono"><%= emp.hraFmt %></td>
+                  <td class="td-mono"><%= emp.daFmt %></td>
+                  <td class="td-mono"><%= emp.pfFmt %></td>
+                  <td class="td-mono"><%= emp.netFmt %></td>
+                  <td>
+                    <div class="td-actions">
+                      <a href="/slip/<%= emp.id %>" class="btn btn-secondary">Slip</a>
+                      <a href="/edit/<%= emp.id %>" class="btn btn-ghost">Edit</a>
+                      <a href="/delete/<%= emp.id %>"
+                         class="btn btn-danger"
+                         onclick="return confirm('Delete <%= emp.name %>?')">
+                        Delete
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+              <% }); %>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    setTimeout(() => {
+      document.querySelectorAll('.flash').forEach(el => {
+        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(-8px)';
+        setTimeout(() => el.remove(), 500);
+      });
+    }, 3500);
+  </script>
+
+</body>
+</html>

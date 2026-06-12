@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salary Slip | PayrollPro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="container">
+
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="logo">
+          <div class="logo-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 7h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zM10 4h4v3h-4V4z"/>
+            </svg>
+          </div>
+          <div class="logo-text">
+            <h1>Payroll<span class="highlight">Pro</span></h1>
+            <p>Enterprise Management System</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- BACK BUTTON -->
+    <div class="slip-nav no-print">
+      <a href="/" class="btn btn-ghost">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        Back to Dashboard
+      </a>
+    </div>
+
+    <!-- SLIP CARD -->
+    <div class="slip-card" id="slipContent">
+
+      <div class="slip-head">
+        <div class="slip-logo">
+          <div class="logo-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 7h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zM10 4h4v3h-4V4z"/>
+            </svg>
+          </div>
+          <div>
+            <h1>Payroll<span class="highlight">Pro</span></h1>
+            <p>Enterprise Management System</p>
+          </div>
+        </div>
+        <div class="slip-badge">Salary Slip</div>
+      </div>
+
+      <div class="slip-meta">
+        <div>
+          <p class="meta-label">Pay Period</p>
+          <p class="meta-val"><%= monthYr %></p>
+        </div>
+        <div>
+          <p class="meta-label">Employee ID</p>
+          <p class="meta-val" style="font-family: var(--font-mono); color: var(--accent);"><%= emp.id %></p>
+        </div>
+        <div>
+          <p class="meta-label">Employee Name</p>
+          <p class="meta-val"><%= emp.name %></p>
+        </div>
+        <div>
+          <p class="meta-label">Department</p>
+          <p class="meta-val"><%= emp.department %></p>
+        </div>
+      </div>
+
+      <hr class="slip-divider">
+
+      <div class="slip-cols">
+
+        <div>
+          <p class="slip-section-title earn-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+            </svg>
+            Earnings
+          </p>
+          <div class="slip-row">
+            <span class="lbl">Basic Salary</span>
+            <span class="val"><%= basicFmt %></span>
+          </div>
+          <div class="slip-row">
+            <span class="lbl">HRA <span class="pct">40%</span></span>
+            <span class="val"><%= hraFmt %></span>
+          </div>
+          <div class="slip-row">
+            <span class="lbl">DA <span class="pct">10%</span></span>
+            <span class="val"><%= daFmt %></span>
+          </div>
+        </div>
+
+        <div>
+          <p class="slip-section-title ded-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/>
+            </svg>
+            Deductions
+          </p>
+          <div class="slip-row">
+            <span class="lbl">Provident Fund <span class="pct">12%</span></span>
+            <span class="val deduct">- <%= pfFmt %></span>
+          </div>
+        </div>
+
+      </div>
+
+      <hr class="slip-divider">
+
+      <div class="net-row">
+        <span class="net-lbl">Net Salary</span>
+        <span class="net-val"><%= netFmt %></span>
+      </div>
+
+      <div class="slip-footer">
+        <p>This is a computer-generated salary slip and does not require a signature.</p>
+        <p>Generated on <%= genDate %></p>
+      </div>
+
+    </div>
+
+    <div class="slip-actions no-print">
+      <button onclick="window.print()" class="btn btn-secondary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 6 2 18 2 18 9"/>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+          <rect x="6" y="14" width="12" height="8"/>
+        </svg>
+        Print / Download PDF
+      </button>
+      <a href="/" class="btn btn-ghost">← Back to Dashboard</a>
+    </div>
+
+  </div>
+
+</body>
+</html>

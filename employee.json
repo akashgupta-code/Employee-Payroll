@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1771567975255,
+    "name": "Akash Gupta",
+    "department": "Senior Software Engineer",
+    "basicSalary": 70000
+  },
+  {
+    "id": 1771568282343,
+    "name": "Sameer Katta",
+    "department": "Software Engineer",
+    "basicSalary": 50000
+  },
+  {
+    "id": 1771568346629,
+    "name": "Akshay Jangra",
+    "department": "Software Engineer",
+    "basicSalary": 50000
+  }
+]
